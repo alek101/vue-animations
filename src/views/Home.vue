@@ -1,12 +1,11 @@
 <template>
   <div class="home">
-    <Toast v-if="showToast" />
-    <Todos @badValue="triggerToast" />
-    <transition name="fade">
-      <div v-if="showP">Hello Ninjas</div>
+    <transition name="toast">
+      <Toast v-if="showToast" />
     </transition>
-
-    <button @click="showP = !showP">Toggle</button>
+    
+    <Todos @badValue="triggerToast" />
+    
   </div>
 </template>
 
@@ -19,35 +18,40 @@ export default {
   components: { Toast, Todos },
   setup() {
     const showToast = ref(false)
-    const showP = ref(false)
 
     const triggerToast = () => {
       showToast.value = true;
       setTimeout(() => showToast.value = false, 3000)
     }
 
-    return { showToast, triggerToast, showP }
+    return { showToast, triggerToast }
   }
 }
 </script>
 
 <style>
-  .fade-enter-from{
+  .toast-enter-from{
     opacity: 0;
+    transform: translateY(-60px);
   }
-  .fade-enter-to{
+  /* default */
+  .toast-enter-to{
     opacity: 1;
+    transform: translateY(0px);
   }
-  .fade-enter-active{
-    transition: all 2s ease;
+  .toast-enter-active{
+    transition: all 0.3s ease;
   }
-  .fade-leave-from {
+  /* default */
+  .toast-leave-from {
     opacity: 1;
+    transform: translateY(0px);
   }
-  .fade.leave-to {
+  .toast-leave-to {
     opacity: 0;
+    transform: translateY(-60px);
   }
-  .fade.leave-active {
-    transition: all 2s ease;
+  .toast-leave-active {
+    transition: all 0.3s ease;
   }
 </style>
