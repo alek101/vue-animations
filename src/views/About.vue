@@ -22,13 +22,13 @@ import gsap from 'gsap'
 export default {
   setup() {
     const beforeEnter = (el) => {
-      console.log('before enter - set initial state')
+      // console.log('before enter - set initial state')
       el.style.transform = 'translateY(-60px)'
       el.style.opacity = 0
     }
 
     const enter = (el, done) => {
-      console.log('starting to enter - making transition')
+      // console.log('starting to enter - making transition')
       gsap.to(el, {
         duration: 5,
         y: 0,
@@ -39,7 +39,7 @@ export default {
     }
 
     const afterEnter = (el) => {
-      console.log('after enter - done');
+      // console.log('after enter - done');
     }
 
     return {beforeEnter, enter, afterEnter}
